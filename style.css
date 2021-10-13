@@ -1,0 +1,188 @@
+body{
+    background-color:whitesmoke;
+}
+a{
+    display: block;
+    text-decoration: none;
+    margin-left: 29%;
+    margin-bottom: 20%;
+    font-size: 20px;
+    color: black;
+}
+
+.container{
+    display: grid;
+    height: 100vh;
+   grid-template-columns: 0.8fr 0.8fr 0.8fr 0.8fr 0.8fr;
+   grid-template-rows: .3fr 1fr 1fr;
+    grid-template-areas: 
+    "title title title title title"
+      "nav main main main description"
+    "nav content1 content2 content3 content4" ;
+    grid-gap:15px;
+}
+
+#title{
+    background: whitesmoke;
+    grid-area: title;
+    margin-left: 5%;
+   
+   
+}
+
+#title h1{
+    text-align: left;
+    font-size: 40px;
+}
+
+nav{
+    background:  whitesmoke;
+    grid-area: nav;
+
+}
+
+#nav button{
+    margin-left: 29%;
+    border-top-left-radius: 45px 30px;
+    border-bottom-left-radius: 45px 30px;
+    border-top-right-radius: 45px 30px;
+    border-bottom-right-radius: 45px 30px;
+    font-size: 15px;
+    width: 120px;
+    height: 40px;
+    background-color: tomato;
+    border-color: tomato;
+    color: white;
+}
+
+#main{
+    background: whitesmoke;
+    grid-area: main;
+    margin-top: 0px;
+   
+}
+
+#main h1{
+    font-size: 500%;
+    margin-top: 0px;
+    margin-left: 32px;
+    
+}
+
+#description{
+    background: whitesmoke;
+    grid-area: description ;
+   
+}
+
+#description p{
+
+    margin-right: 32px;
+    margin-left: 15px;
+    margin-top: 0px;
+}
+
+#description hr{
+    width: 90px;
+    background-color: red;
+    margin-left: 15px;
+
+}
+.content{
+    background-color:whitesmoke;
+    border-style: solid;
+    border: thistle;
+}
+
+#content1{
+    grid-area: content1;
+    
+}
+#content2{
+   
+    grid-area: content2;
+    
+}
+#content3{
+    
+    grid-area: content3;
+   
+}
+#content4{
+    grid-area: content4;
+}
+
+@media only screen and (max-width: 550px) {
+    .container{
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 0.2fr 0.3fr 1fr 1fr 1fr;
+        grid-template-areas: 
+         "title title"
+         "main main"
+         "content1 content2"
+         "content3 content4"
+         "description description" 
+         ;
+        
+    }
+    nav{
+        display: none;
+    }
+
+    #title h1{
+        visibility: hidden;
+        margin-top: 0px;
+        
+    }
+    #title h1::after{
+        visibility: visible;
+        margin-top: 0px;
+        margin-left: 52px;
+        content: "Lorem";
+        text-align: center;
+        font-size: 35px;
+
+    }
+
+    #main h1{
+        font-size: 250%;
+        margin-top: 0px;
+        margin-left: 40px;
+        
+    }
+    #description p{
+        margin-top: 10%;
+    }
+
+    .content{
+        margin-bottom: 10%;
+        width: 100px;
+    }
+
+
+}
+
+img{
+    border-radius: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    box-shadow: 1px 1px;
+ 
+}
+
+.content{
+    margin-bottom: 25%;
+    margin-left: 10%;
+    width: 200px;
+    box-shadow: 8px 8px 8px 8px rgb(216, 207, 207);
+    border-radius: 12px;
+    height: 78%;
+    font-size: 15px;
+}
+
+
+.content p{
+ text-align: center;
+}
