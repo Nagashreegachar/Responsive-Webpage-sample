@@ -1,0 +1,71 @@
+select distinct
+R.REQUIREMENT_ID,
+R.NAME,
+R.INDENT_LEVEL,
+R.PROJECT_ID as ProjectId,
+R.CUST_01,
+R.CUST_02,
+R.REQUIREMENT_TYPE_NAME,
+Cust.CUSTOM_PROPERTY_VALUE_ID,
+Cust.name as name
+
+FROM
+  SpiraTestEntities.R_Requirements AS R
+left join 
+  SpiraTestEntities.R_CustomListValues AS Cust
+ON CAST(R.CUST_01 AS Edm.Int32) = Cust.CUSTOM_PROPERTY_VALUE_ID
+where
+   R.CUST_01 is not null
+   AND 
+   R.IS_DELETED = false
+
+<xsl:template match="/RESULT">
+  <table class="DataGrid">
+	<tr>
+	    <th>REQUIREMENT_ID</th>
+	    <th>NAME</th>
+	    <th>INDENT_LEVEL</th>
+	    <th>PROJECT_ID</th>
+	    <th>CUST_01</th>
+	    <th>CUST_02</th>
+	    <th>REQUIREMENT_TYPE_NAME</th>
+	    <th>CUSTOM_PROPERTY_VALUE_ID</th>
+	    <th>naame</th>
+            <th>IT_HOD</th>
+ 	    <th>BU_HOD</th>
+        </tr>
+	<xsl:for-each select="ROW">
+            <tr>
+	      <td><xsl:value-of select="REQUIREMENT_ID"/></td>
+	      <td><xsl:value-of select="NAME"/></td>
+	      <td><xsl:value-of select="INDENT_LEVEL"/></td>
+	      <td><xsl:value-of select="PROJECT_ID"/></td>
+		<td><xsl:value-of select="CUST_01"/></td>
+		<td><xsl:value-of select="CUST_02"/></td>
+		<td><xsl:value-of select="REQUIREMENT_TYPE_NAME"/></td>
+		<td><xsl:value-of select="CUSTOM_PROPERTY_VALUE_ID"/></td>
+		<td><xsl:value-of select="naame"/></td>
+		<td>
+	            <xsl:choose>
+			<xsl:when test="ProjectId = 24">
+			   <xsl:value-of select="naame"/>
+			</xsl:when>
+			<xsl:otherwise>
+			   <xsl:value-of select="''"/>
+			</xsl:otherwise>
+                    </xsl:choose>
+		</td>
+		<td>
+	            <xsl:choose>
+			<xsl:when test="ProjectId = 24">
+			   <xsl:value-of select="CUST_02"/>
+			</xsl:when>
+			<xsl:otherwise>
+			   <xsl:value-of select="''"/>
+			</xsl:otherwise>
+                    </xsl:choose>
+		</td>
+	    </tr>
+        </xsl:for-each>
+  </table>
+<xsl>

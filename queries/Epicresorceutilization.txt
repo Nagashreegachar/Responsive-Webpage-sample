@@ -1,0 +1,38 @@
+select User.USER_NAME as Name,
+SUM(
+     CASE 
+	WHEN
+         ResourceUtilization.TASK_EFFORT IS NOT NULL
+	THEN
+	 ResourceUtilization.TASK_EFFORT
+	ELSE
+	 0
+	END
+)/60 AS TASK,
+SUM(
+     CASE 
+	WHEN
+         ResourceUtilization.INCIDENT_EFFORT IS NOT NULL
+	THEN
+	 ResourceUtilization.INCIDENT_EFFORT
+	ELSE
+	 0
+	END
+)/60 AS INCIDENT
+FROM
+SpiraTestEntities.R_Users as User
+left join(
+     SELECT RPR.RELEASE_ID,
+     RPR.USER_ID,
+     RPR.TASK_EFFORT,
+     RPR.INCIDENT_EFFORT
+FROM SpiraTestEntities.R_ProjectReleaseResources AS RPR
+  LEFT JOIN SpiraTestEntities.R_Requirements AS R
+  ON RPR.USER_ID = R.OWNER_ID
+  WHERE
+   R.IS_DELETED = False
+   AND
+   R.REQUIREMENT_TYPE_NAME = 'Epic'
+) as ResourceUtilization on User.USER_ID = ResourceUtilization.USER_ID
+WHERE User.IS_ACTIVE = True
+group by User.USER_NAME
